@@ -1,43 +1,52 @@
-/* public/style.css */
+/* Estilos Globais */
 body {
     font-family: Arial, sans-serif;
-    display: flex;
+    background-image: url('../assets/imagens/img3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+body .containero {
+    align-content: center;
+    margin: auto;
+}
+.navbar {
+    padding: 1rem;
+}
+
+.containero {
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-  }
-  
-  .container {
+    height: 100%;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 400px;
-  }
-  
-  h1 {
+}
+
+
+h1 {
     text-align: center;
-  }
-  
-  .form-group {
+}
+
+.form-group {
     margin-bottom: 15px;
-  }
-  
-  label {
+}
+
+label {
     display: block;
     margin-bottom: 5px;
-  }
-  
-  input, select {
+}
+input, select {
     width: 100%;
     padding: 8px;
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
-  
-  button {
+}
+
+.cachorro {
     width: 100%;
     padding: 10px;
     background-color: #28a745;
@@ -47,7 +56,7 @@ body {
     cursor: pointer;
   }
   
-  button:hover {
+.cachorro:hover {
     background-color: #218838;
   }
   

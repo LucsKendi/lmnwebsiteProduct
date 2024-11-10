@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Pesquisa - LMN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h3>Olá, usuário!</h3>
+        <p>Você agora faz parte da LMN!</p>
+        <p>Para auxiliar nosso novo lançamento, por favor responda nossa pesquisa abaixo:</p>
+
+        <div class="survey-box mx-auto p-5 rounded-3 shadow">
+            <h4 class="mb-4">Pesquisas disponíveis</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-light btn-survey" onclick="openFeedbackSurvey()">
+                        <img src="https://www.gstatic.com/images/branding/product/1x/forms_512dp.png" alt="Google Forms" class="survey-icon">
+                        <h5>Pesquisa de feedback Website</h5>
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-light btn-survey" onclick="comingSoonAlert()">
+                        <h5>Pesquisa de satisfação Produto</h5>
+                        <p>EM BREVE</p>
+                    </button>
+                </div>
+            </div>
+            <p class="mt-4">Por enquanto é só!</p>
+            <p>Se tiver alguma dúvida sobre o produto ou problema técnico no site, clique no avatar no canto inferior direito!</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
