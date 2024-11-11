@@ -36,22 +36,28 @@ app.use(bodyParser.json());
 // Servir arquivos estáticos (HTML, CSS, JS) das pastas específicas
 app.use(express.static(path.join(__dirname, 'cadastro')));
 app.use(express.static(path.join(__dirname, 'login')));
+app.use(express.static(path.join(__dirname, 'pesquisas')));
 app.use(express.static(__dirname)); // Para servir o index.html na raiz
 
 // Rota para a página inicial
-app.get('/', (req, res) => {
+app.get('/index', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 
 // Rota para o formulário de cadastro
-app.get('/', (req, res) => {
+app.get('/cadastro', (req, res) => {
   res.sendFile(path.join(__dirname, 'cadastro', 'cadastro.html'));
 });
 
 // Rota para o formulário de login
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'login', 'login.html'));
+});
+
+// Rota para a página de pesquisas
+app.get('/pesquisas', (req, res) => {
+  res.sendFile(path.join(__dirname, 'pesquisas', 'pesquisas.html'));
 });
 
 
@@ -142,11 +148,12 @@ app.post('/login', (req, res) => {
         return res.status(401).send('Email ou senha inválidos.');
       }
 
-      // Se a senha for válida, redirecionar para uma página interna ou área restrita
-      res.send('Login bem-sucedido. Bem-vindo, ' + usuario.nome + '!');
+      // Se a senha for válida, redirecionar para a página de pesquisas
+      res.redirect('/pesquisas'); // Modificação para redirecionar
     });
   });
 });
+
 
 
 

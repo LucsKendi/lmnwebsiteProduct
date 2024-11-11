@@ -6,6 +6,7 @@ body {
   align-items: center;
   height: 100vh;
   background-color: #f4f4f4;
+  font-family: 'Poppins', sans-serif;
 }
 
 .container {
@@ -13,7 +14,9 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  max-width: 400px; /* Define a largura máxima */
+  width: 100%; /* Permite ajuste de largura */
+  margin: auto; /* Centraliza o container */
 }
 
 h1 {

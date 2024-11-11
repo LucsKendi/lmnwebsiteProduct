@@ -12,7 +12,7 @@ const responses = {
 };
 
 document.getElementById('chatbot-toggle-btn').addEventListener('click', toggleChatbot);
-document.getElementById('close-btn').addEventListener('click', toggleChatbot);
+document.getElementById('close-btn').addEventListener('click', closeChatbot);
 document.getElementById('send-btn').addEventListener('click', sendMessage);
 document.getElementById('user-input').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
@@ -22,7 +22,31 @@ document.getElementById('user-input').addEventListener('keypress', function(e) {
 
 function toggleChatbot() {
     const chatbotPopup = document.getElementById('chatbot-popup');
-    chatbotPopup.style.display = chatbotPopup.style.display === 'none' ? 'block' : 'none';
+    const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+    
+    // Verifica se a largura da janela é menor que 576px
+    const windowWidth = window.innerWidth;
+
+    // Esconde o botão de abrir o chat se a largura for menor que 576px
+    if (windowWidth <= 576) {
+        chatbotToggleBtn.style.display = 'none';
+    }
+    
+    // Alterna a visibilidade do chatbot
+    if (chatbotPopup.style.display === 'none' || chatbotPopup.style.display === '') {
+        chatbotPopup.style.display = 'block';
+    }
+}
+
+function closeChatbot() {
+    const chatbotPopup = document.getElementById('chatbot-popup');
+    const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+    
+    // Fecha o chat
+    chatbotPopup.style.display = 'none';
+    
+    // Reexibe o botão de abrir o chat
+    chatbotToggleBtn.style.display = 'block';
 }
 
 function sendMessage() {
