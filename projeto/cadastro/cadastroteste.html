@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-   
+
     <script>
         fetch('header.html')
             .then(response => response.text())
@@ -61,37 +61,6 @@
         </form>
       </div>
 
-      <!-- Modal de Sucesso -->
-<div class="modal fade" id="sucessoModal" tabindex="-1" aria-labelledby="sucessoModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="sucessoModalLabel">Cadastro Realizado</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Cadastro realizado com sucesso! Você será redirecionado para a página de login.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-<script>
-    // Função para exibir o modal e redirecionar após alguns segundos
-document.querySelector("form").addEventListener("submit", function (e) {
-    e.preventDefault(); // Impede o envio normal do formulário
-
-    // Exibe o modal de sucesso
-    var sucessoModal = new bootstrap.Modal(document.getElementById('sucessoModal'));
-    sucessoModal.show();
-
-    // Após 3 segundos, redireciona para a página de login
-    setTimeout(function () {
-        window.location.href = "/login";  // Redireciona para a página de login
-    }, 3000); // 3000ms = 3 segundos
-});
 
 </script>  
 

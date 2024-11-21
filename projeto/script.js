@@ -1,14 +1,15 @@
 const responses = {
-    "oi": "Olá! Como posso te ajudar hoje? Digite LMN para obter informações sobre nós!",
+    "oi": "Olá! Como posso te ajudar hoje? Digite LMN para obter informações sobre nós ou COMANDOS para saber os comandos!",
     "lmn": "A LMN é uma empresa nova no mercado que está lançando um produto incrível para gamers e pessoas que amam passar um tempinho com a família se divertindo.\n Digite Apoiar para saber como nos ajudar!",
     "apoiar": "Para apoiar nosso lançamento, você pode clicar no botão verde nessa mesma tela! Assim você fará um cadastro para acessar as pesquisas de feedback que nos ajudarão a saber suas expectativas e aprender como satisfazê-las!",
-    "comandos": "São: Oi, LMN, Apoiar, Tchau",
+    "comandos": "São: Oi, LMN, Apoiar, Travando, Tchau, Ajuda",
     "tchau": "Volte logo, vou sentir saudade!",
     "default": "Entendi foi nada, por favor clique em sim para ver os comandos existentes.",
-    "expert": "Oi, LMN, Apoiar, Tchau",
+    "expert": "Oi, LMN, Apoiar, Tchau, Travando,",
     "não": "Beleza, fala sozinho aí filhão.",
-    "fdp": "Pra que isso? Vai levar logo um tapa na mente, filhão."
-
+    "fdp": "Pra que isso? Vai levar logo um tapa na mente, filhão.",
+    "travando": "O site provavelmente está travando devido ao alto número de trafégo de usuários, por favor, aguarde alguns minutos antes de realizar alguma requisição. Estamos resolvendo agora mesmo para você!"
+    "ajuda": "Se você deseja ajuda de alguma pessoa real, ligue para o telefone (12) 99999-9999 e seja atendido por um dos nossos colaboradores."
 };
 
 document.getElementById('chatbot-toggle-btn').addEventListener('click', toggleChatbot);
