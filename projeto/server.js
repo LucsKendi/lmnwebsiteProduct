@@ -1,20 +1,20 @@
-// server.js
 const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
+const nodemailer = require('nodemailer');
 const path = require('path');
 
-// Carregar variáveis de ambiente
+// variáveis de ambiente - carregar
 dotenv.config();
 
-// Configuração do banco de dados
+// config do banco de dados
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  database: process.env.DB_NAME,
 });
 
 db.connect((err) => {
@@ -25,139 +25,159 @@ db.connect((err) => {
   console.log('Conectado ao banco de dados.');
 });
 
-// Criar o servidor Express
+// config do Nodemailer (necessário para o envio de e-mails)
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
+  secure: false, // true para SSL, false para TLS (pesquisar, pois nao sei ao certo)
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+// criar o servidor express
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Configurar o Body Parser
+// middleware global -> para o log de requisições
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
+});
+
+// config do body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Servir arquivos estáticos (HTML, CSS, JS) das pastas específicas
+// serve arquivos estáticos das páginas
 app.use(express.static(path.join(__dirname, 'cadastro')));
 app.use(express.static(path.join(__dirname, 'login')));
 app.use(express.static(path.join(__dirname, 'pesquisas')));
-app.use(express.static(__dirname)); // Para servir o index.html na raiz
+app.use(express.static(__dirname)); // serve o index.html na raiz
 
-// Rota para a página inicial
+// route para a página inicial
 app.get('/index', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// route para salvar reclamações e enviar e-mails de confirmação
+app.post('/processa_reclamacao', (req, res) => {
+  console.log('Requisição recebida na rota /processa_reclamacao');
+  console.log('Corpo da requisição:', req.body);
 
-// Rota para o formulário de cadastro
+  const { nome, email, mensagem } = req.body;
+
+  console.log('Dados recebidos:', { nome, email, mensagem });
+
+  if (!nome || !email || !mensagem) {
+    console.warn('Campos obrigatórios ausentes:', { nome, email, mensagem });
+    return res.status(400).json('Todos os campos são obrigatórios.');
+  }
+
+  // insere dados no banco
+  const query = 'INSERT INTO reclamacoes (nome, email, mensagem) VALUES (?, ?, ?)';
+  db.query(query, [nome, email, mensagem], (err) => {
+    if (err) {
+      console.error('Erro ao salvar dados no banco:', err.sqlMessage || err);
+      return res.status(500).json('Erro ao salvar dados no banco.');
+    }
+
+    // config do e-mail de confirmação
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'Confirmação de Recebimento',
+      text: `Olá, ${nome}!\n\nRecebemos sua mensagem:\n"${mensagem}"\n\nObrigado por entrar em contato!`,
+    };
+
+    // envia o e-mail
+    transporter.sendMail(mailOptions, (err) => {
+      if (err) {
+        console.error('Erro ao enviar e-mail:', err);
+        return res.status(500).json('Erro ao enviar e-mail de confirmação.');
+      }
+      res.json('Mensagem enviada com sucesso! Verifique seu e-mail para a confirmação.');
+    });
+  });
+});
+
+// route para o formulário de cadastro
 app.get('/cadastro', (req, res) => {
   res.sendFile(path.join(__dirname, 'cadastro', 'cadastro.html'));
 });
 
-// Rota para o formulário de login
+// route para o formulário de login
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'login', 'login.html'));
 });
 
-// Rota para a página de pesquisas
+// route para a página de pesquisas
 app.get('/pesquisas', (req, res) => {
   res.sendFile(path.join(__dirname, 'pesquisas', 'pesquisas.html'));
 });
 
-
-// Rota para salvar os dados do formulário no banco de dados
+// route para salvar os dados do formulário de cadastro no banco
 app.post('/cadastro', (req, res) => {
   const { nome, email, cpf, telefone, senha, genero } = req.body;
 
-  // Validar dados
+  console.log('Requisição recebida na rota /cadastro:', req.body);
+
   if (!nome || !email || !cpf || !telefone || !senha || !genero) {
-    console.warn('Tentativa de cadastro com campos ausentes:', req.body);
     return res.status(400).send('Todos os campos são obrigatórios.');
   }
 
-  // Log dos dados recebidos para verificar o conteúdo
-  console.log('Dados recebidos:', req.body);
-
-  // Criptografar a senha
+  // criptografa senha
   bcrypt.hash(senha, 10, (err, hashedPassword) => {
     if (err) {
-      console.error('Erro ao criptografar a senha:', err);
-      return res.status(500).send('Erro ao criptografar a senha.');
+      console.error('Erro ao criptografar senha:', err);
+      return res.status(500).send('Erro ao criptografar senha.');
     }
 
-    // Inserir dados no banco
     const query = 'INSERT INTO usuarios (nome, email, cpf, telefone, senha, genero) VALUES (?, ?, ?, ?, ?, ?)';
-    
-    db.query(query, [nome, email, cpf, telefone, hashedPassword, genero], (err, result) => {
+    db.query(query, [nome, email, cpf, telefone, hashedPassword, genero], (err) => {
       if (err) {
-        console.error('Erro ao salvar os dados no banco:', err.sqlMessage || err);
-        
-        // Verificações específicas para erro de conexão
-        if (err.code === 'ER_ACCESS_DENIED_ERROR') {
-          return res.status(500).send('Erro de permissão no banco de dados.');
-        } else if (err.code === 'ER_BAD_DB_ERROR') {
-          return res.status(500).send('Banco de dados especificado não encontrado.');
-        } else if (err.code === 'ER_NO_SUCH_TABLE') {
-          return res.status(500).send('A tabela "usuarios" não existe.');
-        } else if (err.code === 'ER_DUP_ENTRY') {
-          return res.status(500).send('Erro: Dados duplicados, usuário já cadastrado.');
-        }
-
-        return res.status(500).send('Erro ao salvar os dados no banco.');
+        console.error('Erro ao salvar dados no banco:', err.sqlMessage || err);
+        return res.status(500).send('Erro ao salvar dados no banco.');
       }
-
-      console.log('Cadastro realizado com sucesso:', result);
-        // Redirecionar para a página de login após o cadastro bem-sucedido
       res.redirect('/login');
     });
   });
 });
 
-// Rota para o login
+// route para login
 app.post('/login', (req, res) => {
   const { email, senha } = req.body;
 
-  // Validar dados
+  console.log('Requisição recebida na rota /login:', req.body);
+
   if (!email || !senha) {
-    console.warn('Campos obrigatórios ausentes:', req.body);
     return res.status(400).send('Todos os campos são obrigatórios.');
   }
 
-  // Consultar o banco de dados para encontrar o usuário
   const query = 'SELECT * FROM usuarios WHERE email = ?';
-  db.query(query, [email], (err, result) => {
+  db.query(query, [email], (err, results) => {
     if (err) {
-      console.error('Erro ao consultar o banco de dados:', err);
-      return res.status(500).send('Erro ao consultar o banco de dados.');
+      console.error('Erro ao consultar banco:', err);
+      return res.status(500).send('Erro ao consultar banco.');
     }
 
-    // Se o usuário não for encontrado
-    if (result.length === 0) {
-      console.warn('Usuário não encontrado:', email);
+    if (results.length === 0) {
       return res.status(401).send('Email ou senha inválidos.');
     }
 
-    const usuario = result[0];
-
-    // Comparar a senha fornecida com a senha criptografada
+    const usuario = results[0];
     bcrypt.compare(senha, usuario.senha, (err, isMatch) => {
-      if (err) {
-        console.error('Erro ao comparar as senhas:', err);
-        return res.status(500).send('Erro ao validar a senha.');
-      }
-
-      // Se a senha não corresponder
-      if (!isMatch) {
-        console.warn('Senha incorreta para o usuário:', email);
+      if (err || !isMatch) {
         return res.status(401).send('Email ou senha inválidos.');
       }
 
-      // Se a senha for válida, redirecionar para a página de pesquisas
-      res.redirect('/pesquisas'); // Modificação para redirecionar
+      res.redirect('/pesquisas');
     });
   });
 });
 
-
-
-
-// Iniciar o servidor
+// inicia o servidor
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });

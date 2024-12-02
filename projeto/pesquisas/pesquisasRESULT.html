@@ -6,23 +6,134 @@
     <title>Página de Pesquisa - LMN</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style3.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <style>
+        /* proporção dos gráfico */
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 500px; /* altura fixa dos gráficos */
+            overflow: hidden;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        /* layout do grid */
+        .row {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 
     <div class="container text-center mt-5">
         <h3>Olá!</h3>
-        <p>Estes são os resultados das pesquisas!</p>
-        <a href="pesquisas.html">
-        <p class="pão">Clique aqui para voltar</p>
+        <p>Estes são os resultados das pesquisas realizadas!</p>
+        <a href="pesquisas.html" class="btn btn-primary" style="background-color: #1154d1; border-color: #083996; margin-bottom: 20px;">
+            Clique aqui para voltar
         </a>
-                <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSieEYf-QBBo7Qu3dvSI_kI7ufYsO3SyhQqa7xTsVU-0oq9b-ITt5ljbszaNqoRE-cBLYYesNlsbrG2/pubchart?oid=1081737930&amp;format=interactive"></iframe>
-        <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSieEYf-QBBo7Qu3dvSI_kI7ufYsO3SyhQqa7xTsVU-0oq9b-ITt5ljbszaNqoRE-cBLYYesNlsbrG2/pubchart?oid=1604532209&amp;format=interactive"></iframe>
-        <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSieEYf-QBBo7Qu3dvSI_kI7ufYsO3SyhQqa7xTsVU-0oq9b-ITt5ljbszaNqoRE-cBLYYesNlsbrG2/pubchart?oid=1355616925&amp;format=interactive"></iframe>
-        <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSieEYf-QBBo7Qu3dvSI_kI7ufYsO3SyhQqa7xTsVU-0oq9b-ITt5ljbszaNqoRE-cBLYYesNlsbrG2/pubchart?oid=1433156937&amp;format=interactive"></iframe>
+        <!-- Accordion começa aqui (novo conhecimento) -->
+        <div class="accordion" id="chartsAccordion">
+            <!-- primeiro Dropdown -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Pesquisa de Feedback Website
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#chartsAccordion">
+                    <div class="accordion-body">
+                        <!-- grid bootstrap colocando os gráficos lado a lado -->
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="iframe-container">
+                                    <iframe seamless scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSieEYf-QBBo7Qu3dvSI_kI7ufYsO3SyhQqa7xTsVU-0oq9b-ITt5ljbszaNqoRE-cBLYYesNlsbrG2/pubchart?oid=1081737930&amp;format=interactive"></iframe>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="iframe-container">
+                                    <iframe seamless scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSieEYf-QBBo7Qu3dvSI_kI7ufYsO3SyhQqa7xTsVU-0oq9b-ITt5ljbszaNqoRE-cBLYYesNlsbrG2/pubchart?oid=1604532209&amp;format=interactive"></iframe>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="iframe-container">
+                                    <iframe seamless scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSieEYf-QBBo7Qu3dvSI_kI7ufYsO3SyhQqa7xTsVU-0oq9b-ITt5ljbszaNqoRE-cBLYYesNlsbrG2/pubchart?oid=1355616925&amp;format=interactive"></iframe>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="iframe-container">
+                                    <iframe seamless scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSieEYf-QBBo7Qu3dvSI_kI7ufYsO3SyhQqa7xTsVU-0oq9b-ITt5ljbszaNqoRE-cBLYYesNlsbrG2/pubchart?oid=1433156937&amp;format=interactive"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- segundo dropdown -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Convite de Evento da LMN
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#chartsAccordion">
+                    <div class="accordion-body">
+                        <!-- coloca os gráficos lado a lado -->
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="iframe-container">
+                                    <iframe seamless scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT2UVTezqVWMo6TXDYowQGt6UbB9HFksvklFanlcFCLe0JwxKEqNURY5nVTKknuamdQUG9g58vUE0sW/pubchart?oid=1620180641&format=interactive"></iframe>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="iframe-container">
+                                    <iframe seamless scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT2UVTezqVWMo6TXDYowQGt6UbB9HFksvklFanlcFCLe0JwxKEqNURY5nVTKknuamdQUG9g58vUE0sW/pubchart?oid=1566707432&format=interactive"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- terceiro dropdown-->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Pesquisa de Satisfação do Produto (EM BREVE)
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#chartsAccordion">
+                    <div class="accordion-body">
+                        <!-- alerta que informa "conteúdo estará disponível em breve" -->
+                        <div class="alert alert-warning" role="alert">
+                            O conteúdo desta seção estará disponível em breve.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- quarto dropdown -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Sorteio de brinde para os 100 primeiros (EM BREVE)
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#chartsAccordion">
+                    <div class="accordion-body">
+                        <!-- alerta que informa "conteúdo estará disponível em breve" -->
+                        <div class="alert alert-warning" role="alert">
+                            O conteúdo desta seção estará disponível em breve.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fim accordion -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>

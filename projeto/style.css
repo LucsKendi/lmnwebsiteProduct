@@ -6,7 +6,7 @@ body {
 }
 
 a {
-    color: rgba(0, 128, 0, 1);;
+    color: rgb(10, 114, 173);;
     text-decoration: underline;
 }
 
@@ -29,7 +29,7 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Adiciona uma sobreposição escura */
+    background: rgba(0, 0, 0, 0.7); /* adiciona sobreposição mais escura */
 }
 
 .landing .container {
@@ -48,15 +48,15 @@ a {
 }
 
 .btn-primary {
-    background-color: #b8ff00;
-    border-color: #b8ff00;
+    background-color: #0580b9;
+    border-color: #0580b9;
     color: #121212;
     font-weight: bold;
     transition: background-color 0.3s;
 }
 
 .btn-primary:hover {
-    background-color: #9fcc00;
+    background-color: #096c99;
 }
 
 .sobre-empresa .container {
@@ -84,17 +84,18 @@ a {
 
 
 .landing {
-    background-image: url('assets/imagens/img1.png'); /* Imagem de fundo da seção Landing */
-    background-size: cover; /* Faz com que a imagem cubra toda a seção */
-    background-position: center; /* Centraliza a imagem */
-    height: 100vh; /* Define uma altura para a seção */
+    background-image: url('assets/imagens/img1.png'); /* back img da seçao da landing */
+    background-size: cover; /* img cobre toda a seção */
+    background-position: center; /* centraliza a imagem */
+    height: 100vh; /* define uma altura para a seção */
 }
 
+/* mesma coisa */
 .sobre-empresa {
-    background-image: url('assets/imagens/img2.png'); /* Imagem de fundo da seção Sobre a empresa */
-    background-size: cover; /* Faz com que a imagem cubra toda a seção */
-    background-position: center; /* Centraliza a imagem */
-    height: 100vh; /* Define uma altura para a seção */
+    background-image: url('assets/imagens/img2.png'); 
+    background-size: cover; 
+    background-position: center; 
+    height: 100vh; 
 }
 
 
@@ -143,7 +144,7 @@ a {
     right: 20px;
     padding: 12px 15px;
     border: none;
-    background-color: #2fa05b;
+    background-color: #0580b9;
     color: #fff;
     border-radius: 30px;
     font-size: 16px;
@@ -153,7 +154,7 @@ a {
 }
 
 #chatbot-toggle-btn:hover {
-    background-color: #0a7e1d;
+    background-color: #0c6791;
 }
 
 .chatbot-popup {
@@ -185,7 +186,7 @@ a {
 }
 
 .chat-header {
-    background-color: #2fa05b;
+    background-color: #0580b9;
     color: #fff;
     padding: 15px 20px;
     border-top-left-radius: 15px;
@@ -227,7 +228,7 @@ a {
 #send-btn {
     padding: 10px 20px;
     border: none;
-    background-color: #2fa05b;
+    background-color: #0580b9;
     color: #fff;
     border-radius: 12px;
     margin-left: 10px;
@@ -236,7 +237,7 @@ a {
 }
 
 #send-btn:hover {
-    background-color: #2fa05b;
+    background-color: #0c6791;
 }
 
 .user-message, .bot-message {
@@ -256,7 +257,7 @@ a {
 }
 
 .bot-message {
-    background-color: #0b6b23;
+    background-color: #0580b9;
     color: #fff;
     align-self: flex-start;
     margin-right: 10px;
